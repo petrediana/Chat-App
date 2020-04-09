@@ -2,6 +2,14 @@ const express = require('express');
 const app = express();
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
+const mongoose = require('mongoose');
+
+mongoose.connect('mongodb+srv://diana:'
++ process.env.MONGO_ATLAS_PW
++ '@chat-app-jmuhe.mongodb.net/test?retryWrites=true&w=majority',
+{
+    useMongoClient: true
+});
 
 app.use(morgan('dev'));
 app.use(bodyParser.urlencoded({extended: false}));
