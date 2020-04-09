@@ -3,16 +3,18 @@ const app = express();
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
+const routes = require('./api/routes')
 
 mongoose.connect('mongodb+srv://diana:'
 + process.env.MONGO_ATLAS_PW
 + '@chat-app-jmuhe.mongodb.net/test?retryWrites=true&w=majority',
 {
-    useMongoClient: true
+    useNewUrlParser: true,
+    useUnifiedTopology: true
 });
 
 app.use(morgan('dev'));
-app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 
 app.use((req, res, next) => {
@@ -27,11 +29,8 @@ app.use((req, res, next) => {
     next();
 });
 
-app.use((req, res, next) => {
-    res.status(200).json({
-        message : 'ok'
-    });
-});
+app.use('/user-api/user', routes.user);
+
 
 app.use((req, res, next) => {
     const error = new Error('Not found :(');
