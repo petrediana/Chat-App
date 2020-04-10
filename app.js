@@ -31,6 +31,7 @@ app.use((req, res, next) => {
 
 app.use('/user-api/users', routes.user);
 app.use('/friend-api/friends', routes.friend);
+app.use('/conversation-api/conversations', routes.conversation);
 
 
 app.use((req, res, next) => {

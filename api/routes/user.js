@@ -43,9 +43,6 @@ router.get('/:id', (req, res, next) => {
     .catch(err => {
         console.warn(err);
         next(err);
-        res.status(500).json({
-            error : err
-        });
     });
 });
 
@@ -61,6 +58,7 @@ router.post('/', (req, res, next) => {
             createdUser: dbUser
         });
     } catch(err) {
+        console.warn(err);
         next(err);
     }
 });
