@@ -6,10 +6,17 @@ const User = require('../models/user');
 
 router.get('/', (req, res, next) => {
     User.find()
+    .select('_id name')
     .exec()
     .then(docs => {
-        console.log('From db: ' + docs);
-        res.status(200).json(docs);
+        console.log('From db: ' + docs);  
+        if (docs.length > 0) {
+            res.status(200).json(docs);
+        } else {
+            res.status(404).json({
+                message : 'No data available'
+            });
+        }
     })
     .catch(err => {
         console.warn(err);
