@@ -29,9 +29,11 @@ app.use((req, res, next) => {
     next();
 });
 
+
 app.use('/user-api/users', routes.user);
 app.use('/friend-api/friends', routes.friend);
 app.use('/conversation-api/conversations', routes.conversation);
+app.use('/message-api/messages', routes.message);
 
 
 app.use((req, res, next) => {
