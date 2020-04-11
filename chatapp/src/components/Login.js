@@ -1,12 +1,14 @@
 import React, { Component } from 'react'
 import UserStore from '../stores/UserStore'
+import FriendList from './FriendList';
 
 class Login extends Component {
     constructor(props) {
         super(props);
         this.state = {
             usersDb: [],
-            userId: null
+            userId: null,
+            loggedUser: null
         };
 
         this.store = new UserStore();
@@ -31,10 +33,19 @@ class Login extends Component {
 
                 if (user.length > 0) {
                     console.log('User exists');
+                    this.setState({
+                        loggedUser: user
+                    });
                 } else {
                     console.log('User does not exist!');
                 }
             }
+        };
+
+        this.cancel = () => {
+            this.setState({
+                loggedUser: null
+            });
         };
     }
 
@@ -51,13 +62,17 @@ class Login extends Component {
     }
 
     render() {
+        if (this.state.loggedUser) {
+            return <FriendList item={this.state.loggedUser} onCancel={this.cancel} />
+        } else {
         return (
-            <div>
-                Insert user id <br></br>
-                <input type="text" id="login-user-txt" name="userId" onChange={this.handleChange}/>
-                <input type="button" id="login-user-btn" name = "login-user-btn" value="login" onClick={this.handleClick}/>
-            </div>
-        )
+                <div>
+                    Insert user id <br></br>
+                    <input type="text" id="login-user-txt" name="userId" onChange={this.handleChange}/>
+                    <input type="button" id="login-user-btn" name = "login-user-btn" value="login" onClick={this.handleClick}/>
+                </div>
+            )
+        }
     }
 }
 
