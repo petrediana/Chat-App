@@ -20,7 +20,7 @@ class UserStore {
                 });
             });
 
-            this.emitter.emit('GET_USERS_SUCCES');
+            this.emitter.emit('GET_USERS_SUCCESS');
         } catch(err) {
             console.warn(err);
             this.emitter.emit('GET_USERS_ERROR');

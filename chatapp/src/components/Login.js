@@ -34,7 +34,7 @@ class Login extends Component {
                 if (user.length > 0) {
                     console.log('User exists');
                     this.setState({
-                        loggedUser: user
+                        loggedUser: user[0]
                     });
                 } else {
                     console.log('User does not exist!');
@@ -51,7 +51,7 @@ class Login extends Component {
 
     componentDidMount() {
         this.store.getUsers();
-        this.store.emitter.addListener('GET_USERS_SUCCES', () => {
+        this.store.emitter.addListener('GET_USERS_SUCCESS', () => {
             this.setState({
                 usersDb: this.store.usersDb
             });
@@ -63,7 +63,7 @@ class Login extends Component {
 
     render() {
         if (this.state.loggedUser) {
-            return <FriendList item={this.state.loggedUser} onCancel={this.cancel} />
+            return <FriendList item={this.state.loggedUser} />
         } else {
         return (
                 <div>
