@@ -13,6 +13,10 @@ class FriendList extends Component {
         }
 
         this.friendStore = new FriendStore();
+
+        this.cancel = () => {
+            this.props.onCancel();
+        };
     }
 
     componentDidMount() {
@@ -29,6 +33,8 @@ class FriendList extends Component {
     render() {
         return (
             <div>
+                <input type="button" name="back-btn" value="back" onClick={this.cancel}/>
+                <br></br>
                 Friend list for user: {this.state.name}, {this.state._id}
                 <div id="friends-container">
                     {

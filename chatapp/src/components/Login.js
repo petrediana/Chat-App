@@ -63,7 +63,7 @@ class Login extends Component {
 
     render() {
         if (this.state.loggedUser) {
-            return <FriendList item={this.state.loggedUser} />
+            return <FriendList item={this.state.loggedUser} onCancel={this.cancel}/>
         } else {
         return (
                 <div>
