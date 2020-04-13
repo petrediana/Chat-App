@@ -5,6 +5,7 @@ class ConversationStore {
     constructor() {
         this.emitter = new EventEmitter();
         this.conversationsDb = [];
+        this.specificConversation = null;
     }
 
     async getConversations() {
@@ -27,6 +28,31 @@ class ConversationStore {
         }
     }
 
+    async getSpecificConversationBetweenFriends(friend1_id, friend2_id) {
+        try {
+            const request = await fetch(`${SERVER}/conversation-api/conversations`);
+            const response = await request.json();
+    
+            response.forEach(conversation => {
+                if (String(conversation.P1) === String(friend1_id)
+                    && String(conversation.P2) === String(friend2_id)) {
+                        this.specificConversation = conversation;
+                    } else {
+                        if (String(conversation.P1) === String(friend2_id)
+                            && String(conversation.P2) === String(friend1_id)) {
+                                this.specificConversation = conversation;
+                            }
+                    }
+    
+            });
+
+            this.emitter.emit('GET_SPECIFIC_CONVERSATION_SUCCESS');
+        } catch(err) {
+            console.warn(err);
+            this.emitter.emit('GET_SPECIFIC_CONVERSATION_ERROR');
+        }
+    }
+
     async createConversation(conversation) {
         try {
             await fetch(`${SERVER}/conversation-api/conversations`, {
@@ -42,3 +68,5 @@ class ConversationStore {
         }
     }
 }
+
+export default ConversationStore;

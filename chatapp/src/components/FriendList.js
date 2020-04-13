@@ -42,7 +42,7 @@ class FriendList extends Component {
                     P1: null,
                     P2: null
                 }
-            })
+            });
         }
     }
 
