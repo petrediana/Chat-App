@@ -5,15 +5,16 @@ class Friend extends Component {
         super(props);
 
         this.state = {
+            friendName: this.props.item.name,
+            friendId: this.props.item._id,
             isTalking: false
         }
     }
 
     render() {
-        let { item } = this.props;
         return (
             <div>
-                Name: {item.name}
+                Name: {this.state.friendName}  
                 <input type="button" id="select-friend-btn" value="select"/>
             </div>
         )

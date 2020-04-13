@@ -26,8 +26,7 @@ class FriendList extends Component {
                 userFriends: this.friendStore.specificFriendsDb
             });
         });
-
-        console.log(this.friendStore.specificFriendsDb);
+        //console.log(this.friendStore.specificFriendsDb);
     }
 
     render() {
