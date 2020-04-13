@@ -6,6 +6,7 @@ class Conversation extends Component {
         super(props);
 
         this.state = {
+            conversations: [],
             conversationDb: null,
             friend1_id: this.props.item.P1._id,
             friend2_id: this.props.item.P2._id
@@ -19,9 +20,7 @@ class Conversation extends Component {
     }
 
     componentDidMount() {
-        this.conversationStore.getSpecificConversationBetweenFriends(this.state.friend1_id,
-                this.state.friend2_id);
-
+        
     }
 
     render() {
@@ -30,7 +29,7 @@ class Conversation extends Component {
             <div>
                 <input type="button" name="back" value="back" onClick={this.cancel}/>
                 <br></br>
-                Conversation between: {item.P1.name} and {item.P2.name}
+                Conversation between: {item.P1._id} and {item.P2._id}
             </div>
         )
     }

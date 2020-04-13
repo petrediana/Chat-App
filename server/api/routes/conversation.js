@@ -24,6 +24,37 @@ router.get('/', (req, res, next) => {
     });
 });
 
+router.post('/specific-conversation', async(req, res, next) => {
+    try {
+        const allConversations = await Conversation.find();
+        const friend1_id = req.body.P1;
+        const friend2_id = req.body.P2;
+        let conversation = null;
+
+        for (let i = 0; i < allConversations.length; ++i) {
+            if (String(allConversations[i].P1) === String(friend1_id) &&
+                String(allConversations[i].P2) === String(friend2_id)) {
+                    conversation = {
+                        _id: allConversations[i]._id,
+                        P1: allConversations[i].P1,
+                        P2: allConversations[i].P2
+                    };
+            }
+        }
+
+        if (conversation) {
+            res.status(200).json(conversation);
+        } else {
+            res.status(404).json({
+                message: 'not found :('
+            });
+        }
+    } catch(err) {
+        console.warn(err);
+        next(err);
+    }
+});
+
 router.post('/', (req, res, next) => {
     try {
         const dbConversation = new Conversation({
