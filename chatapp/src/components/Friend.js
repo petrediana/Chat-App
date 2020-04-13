@@ -8,14 +8,18 @@ class Friend extends Component {
             friendName: this.props.item.name,
             friendId: this.props.item._id,
             isTalking: false
-        }
+        };
+
+        this.select = () => {
+            this.props.onSelect(this.props.item);
+        };
     }
 
     render() {
         return (
             <div>
                 Name: {this.state.friendName}  
-                <input type="button" id="select-friend-btn" value="select"/>
+                <input type="button" id="select-friend-btn" value="select" onClick={this.select}/>
             </div>
         )
     }

@@ -9,10 +9,17 @@ class FriendList extends Component {
         this.state = {
             name: this.props.item.name,
             _id: this.props.item._id,
-            userFriends: []
+            userFriends: [],
+            selectedFriend: null
         }
 
         this.friendStore = new FriendStore();
+
+        this.select = (friend) => {
+            this.setState({
+                selectedFriend: friend
+            });
+        }
 
         this.cancel = () => {
             this.props.onCancel();
@@ -26,23 +33,26 @@ class FriendList extends Component {
                 userFriends: this.friendStore.specificFriendsDb
             });
         });
-        //console.log(this.friendStore.specificFriendsDb);
     }
 
     render() {
+        if (this.state.selectedFriend) {
+            return <div>Friend selected</div>
+        } else {
         return (
-            <div>
-                <input type="button" name="back-btn" value="back" onClick={this.cancel}/>
-                <br></br>
-                Friend list for user: {this.state.name}, {this.state._id}
-                <div id="friends-container">
-                    {
-                        this.state.userFriends.map((e, i) =>
-                            <Friend item={e} key={i} onSelect={this.onSelect}/>)
-                    }
+                <div>
+                    <input type="button" name="back-btn" value="back" onClick={this.cancel}/>
+                    <br></br>
+                    Friend list for user: {this.state.name}, {this.state._id}
+                    <div id="friends-container">
+                        {
+                            this.state.userFriends.map((e, i) =>
+                                <Friend item={e} key={i} onSelect={this.select}/>)
+                        }
+                    </div>
                 </div>
-            </div>
-        )
+            )
+        }
     }
 }
 
