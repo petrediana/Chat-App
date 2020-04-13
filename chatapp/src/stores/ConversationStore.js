@@ -5,14 +5,37 @@ class ConversationStore {
     constructor() {
         this.emitter = new EventEmitter();
         this.conversationsDb = [];
-        this.specificConversation = null;
+        this.specificConversation = 0;
     }
 
     async getSpecificConversation(friend1_id, friend2_id) {
         try {
+            const bodyObj = {
+                P1: friend1_id,
+                P2: friend2_id
+            };
 
+            const request = await fetch(`${SERVER}/conversation-api/conversations/specific-conversation`, {
+                method: 'post',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(bodyObj)
+            });
+            const response = await request.json();
+            this.specificConversation = response._id;
+            /*this.specificConversation = {
+                _id: response._id,
+                P1: response.P1,
+                P2: response.P2
+            };*/
+            //this.specificConversation.push(response);
+            console.log(this.specificConversation);
+
+            this.emitter.emit('GET_SPECIFIC_CONVERSATION_SUCCESS');
         } catch(err) {
-            
+            console.warn(err);
+            this.emitter.emit('GET_SPECIFIC_CONVERSATION_ERROR');  
         }
     }
 
