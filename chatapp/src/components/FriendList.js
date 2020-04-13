@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import FriendStore from '../stores/FriendStore'
 import Friend from '../components/Friend'
+import Conversation from '../components/Conversation'
 
 class FriendList extends Component {
     constructor(props) {
@@ -10,20 +11,39 @@ class FriendList extends Component {
             name: this.props.item.name,
             _id: this.props.item._id,
             userFriends: [],
-            selectedFriend: null
+            selectedFriend: null,
+            conversationData: {
+                P1: null,
+                P2: null
+            }
         }
 
         this.friendStore = new FriendStore();
 
         this.select = (friend) => {
+            const obj = {
+                P1: this.props.item,
+                P2: friend
+            };
+
             this.setState({
-                selectedFriend: friend
+                selectedFriend : friend,
+                conversationData: obj
             });
         }
 
         this.cancel = () => {
             this.props.onCancel();
         };
+
+        this.cancelConversation = () => {
+            this.setState({
+                conversationData: {
+                    P1: null,
+                    P2: null
+                }
+            })
+        }
     }
 
     componentDidMount() {
@@ -35,9 +55,9 @@ class FriendList extends Component {
         });
     }
 
-    render() {
-        if (this.state.selectedFriend) {
-            return <div>Friend selected</div>
+    render() { 
+        if (this.state.conversationData.P1 && this.state.conversationData.P2) {
+            return <Conversation item={this.state.conversationData} onCancel={this.cancelConversation}/>
         } else {
         return (
                 <div>
