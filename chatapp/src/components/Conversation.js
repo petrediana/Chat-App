@@ -37,6 +37,9 @@ class Conversation extends Component {
                 <input type="button" name="back" value="back" onClick={this.cancel}/>
                 <br></br>
                 Conversation between: {item.P1._id} and {item.P2._id}
+                <div id='message-box-container'>
+
+                </div>
             </div>
         )
     }

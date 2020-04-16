@@ -28,3 +28,5 @@ class MessageStore {
         }
     }
 }
+
+export default MessageStore
