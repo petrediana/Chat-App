@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import MessageStore from '../stores/MessageStore'
+import Message from '../components/Message'
 
 class MessageList extends Component {
     constructor(props) {
@@ -24,7 +25,11 @@ class MessageList extends Component {
 
     render() {
         return (
-            <div>messagelist >:P</div>
+            <div>
+                {
+                    
+                }
+            </div>
         )
     }
 }
