@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import ConversationStore from '../stores/ConversationStore'
+import MessageList from '../components/MessageList'
 
 class Conversation extends Component {
     constructor(props) {
@@ -7,7 +8,7 @@ class Conversation extends Component {
 
         this.state = {
             conversations: [],
-            coversation_id: 0,
+            conversation_id: 0,
             friend1_id: this.props.item.P1._id,
             friend2_id: this.props.item.P2._id
         };
@@ -26,22 +27,25 @@ class Conversation extends Component {
                 conversation_id: this.conversationStore.specificConversation
             });
         });
-        console.log('componentDidMount >:(');
-        console.log(this.conversationStore.specificConversation);
     }
 
     render() {
         let { item } = this.props;
-        return (
-            <div>
-                <input type="button" name="back" value="back" onClick={this.cancel}/>
-                <br></br>
-                Conversation between: {item.P1._id} and {item.P2._id}
-                <div id='message-box-container'>
-
+        if (this.state.conversation_id !== 0) {
+            return (
+                <div>
+                    <input type="button" name="back" value="back" onClick={this.cancel}/>
+                    <br></br>
+                    Conversation between: {item.P1._id} and {item.P2._id}
+                    <div id='message-box-container'>
+                        { this.state.conversation_id }
+                        <MessageList item={this.state.conversation_id} />
+                    </div>
                 </div>
-            </div>
-        )
+            )
+        } else {
+            return null
+        }
     }
 }
 

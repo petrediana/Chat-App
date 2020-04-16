@@ -30,7 +30,7 @@ class ConversationStore {
                 P2: response.P2
             };*/
             //this.specificConversation.push(response);
-            console.log(this.specificConversation);
+            //console.log(this.specificConversation);
 
             this.emitter.emit('GET_SPECIFIC_CONVERSATION_SUCCESS');
         } catch(err) {

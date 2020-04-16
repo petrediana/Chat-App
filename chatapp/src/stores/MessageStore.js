@@ -1,20 +1,23 @@
-import EventEmitter from 'fbemitter'
+import { EventEmitter } from 'fbemitter'
 const SERVER = 'http://localhost:8080';
 
 class MessageStore {
     constructor() {
-        this.emitter = new EventEmitter(),
-        this.specificMessages = []
+        this.emitter = new EventEmitter();
+        this.specificMessages = [];
     }
 
     async getSpecificMessagesForConversation(conversationId) {
         try {
+            const bodyObj = {
+                conversationId: conversationId
+            };
             const request = await fetch(`${SERVER}/message-api/messages/specific-conversation`, {
                 method: 'post',
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify(conversationId)
+                body: JSON.stringify(bodyObj)
             });
             const response = await request.json();
             response.forEach(specificMessage => {

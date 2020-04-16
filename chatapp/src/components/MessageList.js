@@ -14,12 +14,18 @@ class MessageList extends Component {
     }
 
     componentDidMount() {
-        this.messageStore.getSpecificMessagesForConversation(conversationId);
+        this.messageStore.getSpecificMessagesForConversation(this.state.conversationId);
         this.messageStore.emitter.addListener('GET_SPECIFIC_MESSAGES_SUCCESS', () => {
             this.setState({
                 messages: this.messageStore.specificMessages
             });
         });
+    }
+
+    render() {
+        return (
+            <div>messagelist >:P</div>
+        )
     }
 }
 
