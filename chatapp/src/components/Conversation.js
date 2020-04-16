@@ -7,7 +7,6 @@ class Conversation extends Component {
 
         this.state = {
             conversations: [],
-            // conversationDb: [],
             coversation_id: 0,
             friend1_id: this.props.item.P1._id,
             friend2_id: this.props.item.P2._id
@@ -38,7 +37,6 @@ class Conversation extends Component {
                 <input type="button" name="back" value="back" onClick={this.cancel}/>
                 <br></br>
                 Conversation between: {item.P1._id} and {item.P2._id}
-                Fmm aici: {this.state.conversation_id}
             </div>
         )
     }
