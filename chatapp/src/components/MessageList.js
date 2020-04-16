@@ -21,16 +21,23 @@ class MessageList extends Component {
                 messages: this.messageStore.specificMessages
             });
         });
+        
+        console.log(this.messageStore.specificMessages);
     }
 
     render() {
-        return (
-            <div>
-                {
-                    
-                }
-            </div>
-        )
+        if (this.state.messages.length > 0) {
+            return (
+                <div>
+                    {
+                        this.state.messages.map((e, i) =>
+                            <Message item={e} key={i} />)
+                    }
+                </div>
+            )
+        } else {
+            return null
+        }
     }
 }
 

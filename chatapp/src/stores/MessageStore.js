@@ -21,7 +21,12 @@ class MessageStore {
             });
             const response = await request.json();
             response.forEach(specificMessage => {
-                this.specificMessages.push(specificMessage)
+                this.specificMessages.push({
+                    _id: specificMessage._id,
+                    message: specificMessage.message,
+                    info: specificMessage.info,
+                    conversationId: specificMessage.conversationId
+                });
             });
 
             this.emitter.emit('GET_SPECIFIC_MESSAGES_SUCCESS');
